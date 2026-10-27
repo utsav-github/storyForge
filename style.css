@@ -1,0 +1,182 @@
+:root {
+  --bg: #0b1020;
+  --panel: rgba(9, 12, 23, 0.68);
+  --panel-strong: rgba(4, 7, 16, 0.86);
+  --text: #f3f5fa;
+  --muted: #c8d0e1;
+  --accent: #ffb347;
+  --accent-strong: #ff7a18;
+  --choice-bg: rgba(15, 20, 34, 0.72);
+  --shadow: rgba(0, 0, 0, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 480px;
+  max-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.full-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+#menu-screen {
+  background: url("Assets/StoryForge Main Menu.png") center center / cover no-repeat #000;
+}
+
+#menu-bg {
+  display: none;
+}
+
+.story-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.story-hotspot {
+  position: absolute;
+  display: block;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 0;
+}
+
+.story-hotspot:active {
+  transform: scale(0.99);
+}
+
+.choice-button {
+  position: relative;
+  appearance: none;
+  border: 0;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 260px;
+  min-height: 74px;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.22);
+  background-color: rgba(255, 255, 255, 0.06);
+  transition: transform 0.18s ease;
+}
+
+.choice-button:active {
+  transform: scale(0.98);
+}
+
+.choice-button.choice-a {
+  background-image: url("Assets/Son of the Dragon Button 1.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.choice-button.choice-b {
+  background-image: url("Assets/Son of the Dragon Button 2.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.choice-text {
+  display: none;
+}
+
+.decision-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(4, 6, 12, 0.28) 28%,
+    rgba(4, 6, 12, 0.7) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem 1rem max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.decision-panel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 550px) {
+  #app {
+    max-width: 500px;
+  }
+
+  .story-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .story-card {
+    min-height: 180px;
+  }
+}

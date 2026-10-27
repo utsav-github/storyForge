@@ -1,0 +1,17 @@
+{
+  "name": "StoryForge",
+  "short_name": "StoryForge",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "description": "Mobile-first interactive story proof of concept",
+  "icons": [
+    {
+      "src": "Assets/StoryForge_Official_Logo_Transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content
+    <meta name="theme-color" content="#0b1020" />
+    <meta
+      name="description"
+      content="StoryForge interactive story prototype for mobile-first investor demo."
+    />
+    <title>StoryForge</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="Assets/StoryForge_Official_Logo_Transparent.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app" role="application" aria-live="polite">
+      <section id="boot-screen" class="screen active">
+        <video
+          id="boot-video"
+          class="full-video"
+          autoplay
+          playsinline
+          muted
+          preload="auto"
+          aria-label="Opening video"
+        ></video>
+      </section>
+
+      <section id="menu-screen" class="screen hidden" aria-label="Main menu">
+        <img
+          id="menu-bg"
+          src="Assets/StoryForge Main Menu.png"
+          alt="Story menu background"
+        />
+
+        <div class="story-grid" id="story-grid" aria-label="Story selection"></div>
+      </section>
+
+      <section id="story-screen" class="screen hidden" aria-label="Story playback">
+        <video
+          id="story-video"
+          class="full-video"
+          autoplay
+          playsinline
+          preload="auto"
+          aria-label="Story video"
+        ></video>
+
+        <div id="decision-overlay" class="decision-overlay hidden" aria-live="assertive">
+          <div class="decision-panel">
+            <button class="choice-button choice-a" type="button" data-choice="a"></button>
+            <button class="choice-button choice-b" type="button" data-choice="b"></button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
