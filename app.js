@@ -149,12 +149,10 @@ async function startBootSequence() {
   elements.bootVideo.autoplay = true;
   elements.bootVideo.loop = false;
 
-  elements.bootVideo.addEventListener('click', unlockAudio, { once: true });
-  elements.bootVideo.addEventListener('pointerdown', unlockAudio, { once: true });
-  elements.bootVideo.addEventListener('touchstart', unlockAudio, { once: true });
-  document.addEventListener('pointerdown', unlockAudio, { once: true });
-  document.addEventListener('touchstart', unlockAudio, { once: true });
-  document.addEventListener('click', unlockAudio, { once: true });
+  elements.bootVideo.addEventListener('pause', () => {
+    if (elements.bootVideo.ended) return;
+    elements.bootVideo.play().catch(() => {});
+  });
 
   try {
     await elements.bootVideo.play();
