@@ -261,6 +261,18 @@ document.querySelectorAll('.choice-button').forEach((button) => {
   });
 });
 
+document.addEventListener('touchstart', (event) => {
+  if (event.target && event.target.tagName === 'VIDEO') {
+    event.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener('pointerdown', (event) => {
+  if (event.target && event.target.tagName === 'VIDEO') {
+    event.preventDefault();
+  }
+}, { passive: false });
+
 window.addEventListener('DOMContentLoaded', () => {
   registerServiceWorker();
   renderMenu();
