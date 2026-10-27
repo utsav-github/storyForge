@@ -167,6 +167,29 @@ body {
   gap: 0.75rem;
 }
 
+.boot-start-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 2;
+}
+
+.boot-start-button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.5rem;
+  background: rgba(255, 179, 71, 0.96);
+  color: #111;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+}
+
 @media (min-width: 550px) {
   #app {
     max-width: 500px;

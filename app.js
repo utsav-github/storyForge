@@ -42,6 +42,8 @@ const elements = {
   storyVideo: document.getElementById('story-video'),
   decisionOverlay: document.getElementById('decision-overlay'),
   choiceButtons: [...document.querySelectorAll('.choice-button')],
+  bootStartOverlay: document.getElementById('boot-start-overlay'),
+  bootStartButton: document.getElementById('boot-start-button'),
 };
 
 function registerServiceWorker() {
@@ -132,13 +134,16 @@ function unlockAudio() {
   audioUnlocked = true;
 
   const videos = [elements.bootVideo, elements.storyVideo].filter(Boolean);
-
   videos.forEach((video) => {
     video.muted = false;
     if (!video.paused) {
       video.play().catch(() => {});
     }
   });
+
+  if (elements.bootStartOverlay) {
+    elements.bootStartOverlay.classList.add('hidden');
+  }
 }
 
 async function startBootSequence() {
@@ -149,10 +154,20 @@ async function startBootSequence() {
   elements.bootVideo.autoplay = true;
   elements.bootVideo.loop = false;
 
-  elements.bootVideo.addEventListener('pause', () => {
-    if (elements.bootVideo.ended) return;
-    elements.bootVideo.play().catch(() => {});
-  });
+  if (elements.bootStartButton) {
+    elements.bootStartButton.addEventListener('click', async () => {
+      unlockAudio();
+      try {
+        await elements.bootVideo.play();
+      } catch (error) {
+        console.warn('Intro video play after user gesture failed', error);
+      }
+    }, { once: true });
+  }
+
+  document.addEventListener('pointerdown', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+  document.addEventListener('click', unlockAudio, { once: true });
 
   try {
     await elements.bootVideo.play();
