@@ -4,6 +4,8 @@ const state = {
   videosToPreload: new Set(),
 };
 
+let audioUnlocked = false;
+
 const stories = [
   {
     id: 'story-1',
@@ -125,13 +127,34 @@ function buildChoiceButtons(story) {
   });
 }
 
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  const videos = [elements.bootVideo, elements.storyVideo].filter(Boolean);
+
+  videos.forEach((video) => {
+    video.muted = false;
+    if (!video.paused) {
+      video.play().catch(() => {});
+    }
+  });
+}
+
 async function startBootSequence() {
   const openingVideo = 'Assets/Son of the Dragon 1.mp4';
   elements.bootVideo.src = openingVideo;
-  elements.bootVideo.muted = false;
+  elements.bootVideo.muted = true;
   elements.bootVideo.playsInline = true;
   elements.bootVideo.autoplay = true;
   elements.bootVideo.loop = false;
+
+  elements.bootVideo.addEventListener('click', unlockAudio, { once: true });
+  elements.bootVideo.addEventListener('pointerdown', unlockAudio, { once: true });
+  elements.bootVideo.addEventListener('touchstart', unlockAudio, { once: true });
+  document.addEventListener('pointerdown', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+  document.addEventListener('click', unlockAudio, { once: true });
 
   try {
     await elements.bootVideo.play();
